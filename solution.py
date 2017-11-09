@@ -4,10 +4,10 @@ import string
 def generate_triangles(length=10, height=10, columns=6, rows=6):
     for row in range(0, rows):
         for column in range(0, columns):
-            yield (string.ascii_uppercase[row] + str((column*2)+1), (length*column, (height*row)+height),
-                   (length*column, height*row), ((length*column)+length, (height*row)+height))
-            yield (string.ascii_uppercase[row] + str((column*2)+2), ((length*column)+length, height*row),
-                   (length*column, height*row), ((length*column)+length, (height*row)+height))
+            x = length * column
+            y = height * row
+            yield (string.ascii_uppercase[row] + str((column*2)+1), (x, y+height), (x, y), (x+length, y+height))
+            yield (string.ascii_uppercase[row] + str((column*2)+2), (x+length, y), (x, y), (x+length, y+height))
 
 
 def detect_triangle(v1, v2, v3, length=10, height=10, columns=6, rows=6):
