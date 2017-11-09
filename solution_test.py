@@ -6,7 +6,7 @@ class SolutionTestCase(unittest.TestCase):
 
     def test_create(self):
         test = list(generate_triangles())
-        print(test)
+        #print(test)
         self.assertEqual(len(test), 72)
 
     def test_detect(self):
