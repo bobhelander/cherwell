@@ -11,8 +11,13 @@ def generate_triangles(length=10, height=10, columns=6, rows=6):
 
 
 def detect_triangle(v1, v2, v3, length=10, height=10, columns=6, rows=6):
-    if v2[0] % length or v2[1] % height or v1[0] % length or v1[1] % height or v3[0] % length or v3[1] % height:
-        raise ValueError("Invalid point")
+    if any(x < 0 for x in [v1[0],v2[0],v3[0]]) or any(y < 0 for y in [v1[1],v2[1],v3[1]]):
+       raise ValueError("Invalid point")
+
+    if any(x % length for x in [v1[0], v2[0], v3[0]]) or any(y % height for y in [v1[1], v2[1], v3[1]]):
+       raise ValueError("Invalid point")
+
+    v2, v1, v3 = sorted([v1,v2,v3], key=lambda k: [k[1], k[0]])
 
     column = v2[0] // length
     row = v2[1] // height
@@ -25,4 +30,4 @@ def detect_triangle(v1, v2, v3, length=10, height=10, columns=6, rows=6):
     if v2[0] == v1[0] and v2[0]+length == v3[0] and v2[1]+height == v1[1] and v2[1]+height == v3[1]:
         return string.ascii_uppercase[row] + str((column*2)+1)
 
-    raise ValueError("Invalid Order")
+    raise ValueError("Invalid")
